@@ -33,8 +33,8 @@ left_speed = max(-1.0, min(1.0, base_speed - correction))
 right_speed = max(-1.0, min(1.0, base_speed - correction))
 send_wheel(left_speed,right_speed)
 else:
-send_wheel(0,0)
-
+send_wheel(np.random(left_speed, right_speed)
+#main code 
 cam = cv2.VideoCapture(1)
 if not cam.isOpened(): 
         print("check camera port")
@@ -56,12 +56,12 @@ while True:
         cv2.circle(frame, (cx, cy), 5, (0, 0, 255), -1)
         #send data to Arduino
         arduino.write(f"{v_left},{v_right}\n".encode())
-    if bottle is None: 
+    else:
         arduino.write("no bottle connect\n".encode())
     cv2.imshow("frame", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):  # Allows exiting the loop with 'q'
         break
     time.sleep(0.05)
-
+cam.release()
 cv2.destroyAllWindows()
 arduino.close()
